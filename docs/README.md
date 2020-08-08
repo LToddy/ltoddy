@@ -1,4 +1,4 @@
-## 我在mac上常用的一些脚本
+## 我在mac上常用的一些脚本(在scripts目录下)
 
 - `install-kubernetes-images-for-mac.sh`
 
