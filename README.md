@@ -12,6 +12,9 @@
 <img align="right" src="https://github-readme-stats.vercel.app/api/top-langs/?username=dannypsnl&hide=HTML,css" />
 <img src="https://camo.githubusercontent.com/c7102432543dd62ea51909c419f8f2ba4c67df93/68747470733a2f2f6769746875622d726561646d652d73746174732e76657263656c2e6170702f6170693f757365726e616d653d6c746f646479" alt="ltoddy's github stats">
 
+有兴趣的可以关注一下公众号,当然没兴趣就算啦.
+
+<img align="center" src="https://img.vim-cn.com/3f/b3220ef7f8a62878fe2c51f3a90a3c314831ec.jpg" alt="微信公众号:就是个写代码的" />
 
 
 <!--
