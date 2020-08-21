@@ -7,12 +7,14 @@
 我的网名：`ltoddy`，什么意思呢。我姓刘，我取了它的拼音的首字母`l`，然后是我的英文名字：`todd`，这个名字
 有种笨笨的感觉，但在我看来是大智若愚！最后一个字母`y`，是我喜欢的一个人她的姓。
 
-------------------------------------------------------
-
-<div style="display: flex; justify-content: space-between;">
-  <img src="https://camo.githubusercontent.com/c7102432543dd62ea51909c419f8f2ba4c67df93/68747470733a2f2f6769746875622d726561646d652d73746174732e76657263656c2e6170702f6170693f757365726e616d653d6c746f646479" alt="ltoddy's github stats">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ltoddy&hide=HTML,css" />
-</div>
+<table>
+  <tbody>
+    <tr>
+      <td><img src="https://camo.githubusercontent.com/c7102432543dd62ea51909c419f8f2ba4c67df93/68747470733a2f2f6769746875622d726561646d652d73746174732e76657263656c2e6170702f6170693f757365726e616d653d6c746f646479" alt="ltoddy's github stats"></td>
+      <td><img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ltoddy&hide=HTML,css" /></td>
+    </tr>  
+  </tbody>
+</table>
 
 ------------------------------------------------------
 
