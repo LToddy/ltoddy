@@ -25,7 +25,7 @@
 </tr> -->
 </table>
 
-<p align="center"><img src="https://visitor-badge.laobi.icu/badge?page_id=ltoddy.cloc-rs" alt="visitor badge"/></p>
+<p align="center"><img src="https://visitor-badge.laobi.icu/badge?page_id=ltoddy.ltoddy" alt="visitor badge, start on october 28"/></p>
 
 
 <!--
