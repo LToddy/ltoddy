@@ -11,7 +11,9 @@
 (define information
   #hash([#:name . "liutao"]
         [#:mail . "taoliu0509@gmail.com"]
-        [#:languages . '(Rust Golang Python)]))
+        [#:languages . '(Rust Golang Python)]
+        [#:company . "Bytedance"]
+        [#:title . "full stack engineer"]))
 ```
 
 <table>
