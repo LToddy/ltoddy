@@ -7,13 +7,18 @@
 我的网名：`ltoddy`，什么意思呢。我姓刘，我取了它的拼音的首字母`l`，然后是我的英文名字：`todd`，这个名字
 有种笨笨的感觉，但在我看来是大智若愚！最后一个字母`y`，是我喜欢的一个人她的姓。
 
+#### 关于我
+
+目前在字节跳动-抖音移动平台做一名全栈工程师.
+
 ```racket
 (define information
   #hash([#:name . "liutao"]
         [#:mail . "taoliu0509@gmail.com"]
         [#:languages . '(Rust Golang Python)]
         [#:company . "Bytedance"]
-        [#:title . "full stack engineer"]))
+        [#:title . "full stack engineer"]
+        [#:bilibili . "https://space.bilibili.com/175769241"]))
 ```
 
 <table>
