@@ -9,12 +9,12 @@
 💬 If you wanna ask me some question, the following is my contact.
 
 - QQ: 1205446803
-- e-mail: taoliu0509@gmail.com
+- e-mail: liutao.rs@bytedance.com
 
 ```racket
 (define information
   #hash([#:name . "liutao"]
-        [#:email . "taoliu0509@gmail.com"]
+        [#:email . "liutao.rs@bytedance.com"]
         [#:languages . '(Rust Golang Python)]
         [#:company . "Bytedance"]
         [#:title . "full stack engineer"]
