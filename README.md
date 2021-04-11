@@ -18,9 +18,9 @@
     <td><img src="https://github-readme-stats.vercel.app/api?username=ltoddy&show_icons=true&theme=Gradient" alt="ltoddy's github stats"></td>
     <td><img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ltoddy&layout=compact&hide=HTML" alt="ltoddy's top langs"></td>
   </tr>
-  <tr>
+  <!-- <tr> 因为wakatime的jetbrains的插件更新之后太卡,先暂停
     <td><img src="https://github-readme-stats.vercel.app/api/wakatime?username=ltoddy&layout=compact" alt="ltoddy's wakatime stats"></td>
-  </tr>
+  </tr> -->
 </table>
 
 <p align="center"><img src="https://visitor-badge.laobi.icu/badge?page_id=ltoddy.ltoddy" alt="visitor badge, start on october 28"/></p>
