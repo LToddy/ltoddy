@@ -7,3 +7,14 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+async-std = { version = "1.9", features = ["attributes"] }
+driftwood = "0.0.6"
+env_logger = "0.8"
+log = "0.4"
+mimalloc = "0.1"
+serde = "1"
+tide = "0.16"
+
+[profile.release]
+lto = true
+opt-level = 3
