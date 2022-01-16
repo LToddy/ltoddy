@@ -1,25 +1,37 @@
-#[global_allocator]
-static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
+use std::net::SocketAddr;
 
-use std::env;
+use axum::{routing, AddExtensionLayer, Router};
+use configit::Loader;
+use sea_orm::Database;
+use serde::Deserialize;
+use tower::ServiceBuilder;
 
-use log::Level;
-use tide::{Request, Response};
-
-async fn whoami(_req: Request<()>) -> tide::Result<Response> {
-    Ok("ltoddy".into())
+#[derive(Debug, Deserialize)]
+pub struct AppConfig {
+    host: [u8; 4],
+    port: u16,
+    database_url: String,
 }
 
-#[async_std::main]
-async fn main() -> tide::Result<()> {
-    env::set_var("RUST_LOG", Level::Info.as_str());
-    env_logger::init();
+#[tokio::main]
+pub async fn main() -> anyhow::Result<()> {
+    let config = AppConfig::load_by("config.toml").expect("couldn't load app config");
+    println!("config: {config:?}");
 
-    let mut app = tide::new();
-    app.with(driftwood::ApacheCommonLogger);
+    tracing_subscriber::fmt::init();
 
-    app.at("/whoami").get(whoami);
+    let conn = Database::connect(config.database_url).await.expect("database connection failed");
 
-    app.listen("127.0.0.1:8080").await?;
+    let app =
+        Router::new().route("/", routing::get(root)).layer(ServiceBuilder::new().layer(AddExtensionLayer::new(conn)));
+
+    let addr = SocketAddr::from((config.host, config.port));
+    tracing::info!("listening on {}", addr);
+    axum::Server::bind(&addr).serve(app.into_make_service()).await?;
     Ok(())
+}
+
+async fn root() -> &'static str {
+    tracing::info!("incoming!");
+    "Hello, World!\n"
 }
