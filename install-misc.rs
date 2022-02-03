@@ -1,13 +1,20 @@
-use std::fs::canonicalize;
+use std::fs;
 use std::path::{Path, PathBuf};
 
-use anyhow::Context;
-use futures::{stream, StreamExt};
-use tokio::fs;
+use anyhow::{Context, Result};
+use clap::Parser;
+use log::{info, LevelFilter};
+use simplelog::{ColorChoice, Config, TermLogger, TerminalMode};
 
-#[tokio::main]
-pub async fn main() -> anyhow::Result<()> {
+#[derive(Parser)]
+pub struct Args {
+    #[clap(short = 'f', long = "force")]
+    force: bool,
+}
+
+pub fn main() -> Result<()> {
     init_logger();
+    let args: Args = Args::parse();
     let home_dir = PathBuf::from(env!("HOME"));
 
     let miscellaneous = vec![
@@ -15,34 +22,29 @@ pub async fn main() -> anyhow::Result<()> {
         ("misc/alacritty.yml", home_dir.join(".config/alacritty/alacritty.yml")),
         ("misc/vimrc", home_dir.join(".vimrc")),
     ];
-    miscellaneous
-        .iter()
-        .map(|(from, to)| try_copy_file(from, to))
-        .collect::<stream::FuturesUnordered<_>>()
-        .collect::<Vec<_>>()
-        .await;
+    info!("start install misc files");
+    for (from, to) in miscellaneous {
+        try_copy_file(args.force, from, to)?;
+    }
     Ok(())
 }
 
 pub fn init_logger() {
-    use log::LevelFilter;
-    use simplelog::{ColorChoice, Config, TermLogger, TerminalMode};
-
     TermLogger::init(LevelFilter::Debug, Config::default(), TerminalMode::Mixed, ColorChoice::Auto)
         .unwrap();
 }
 
-pub async fn try_copy_file<A, B>(from: A, to: B) -> anyhow::Result<()>
+pub fn try_copy_file<A, B>(force: bool, from: A, to: B) -> Result<()>
 where
     A: AsRef<Path>,
     B: AsRef<Path>,
 {
     let (from, to) = (from.as_ref(), to.as_ref());
     let from =
-        canonicalize(from).with_context(|| format!("wrong file path: `{}`", from.display()))?;
-    if !to.exists() {
-        log::info!("copying `{}` -> `{}`", from.display(), to.display());
-        fs::copy(from, to).await?;
+        fs::canonicalize(from).with_context(|| format!("wrong file path: `{}`", from.display()))?;
+    if force || !to.exists() {
+        info!("copying `{}` -> `{}`", from.display(), to.display());
+        fs::copy(from, to)?;
     }
     Ok(())
 }
