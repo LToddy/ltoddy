@@ -1,24 +1,13 @@
 use std::fs::canonicalize;
-use std::io;
 use std::path::{Path, PathBuf};
 
+use anyhow::Context;
 use futures::{stream, StreamExt};
-use log::LevelFilter::Debug;
-use simplelog::{ColorChoice, TermLogger, TerminalMode};
 use tokio::fs;
 
-pub type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
-
 #[tokio::main]
-pub async fn main() {
-    TermLogger::init(Debug, Default::default(), TerminalMode::Mixed, ColorChoice::Auto).unwrap();
-
-    if let Err(e) = run().await {
-        eprintln!("{e}");
-    }
-}
-
-pub async fn run() -> Result<()> {
+pub async fn main() -> anyhow::Result<()> {
+    init_logger();
     let home_dir = PathBuf::from(env!("HOME"));
 
     let miscellaneous = vec![
@@ -28,16 +17,29 @@ pub async fn run() -> Result<()> {
     ];
     miscellaneous
         .iter()
-        .map(|(from, to)| copy_if_not_exist(from, to))
+        .map(|(from, to)| try_copy_file(from, to))
         .collect::<stream::FuturesUnordered<_>>()
         .collect::<Vec<_>>()
         .await;
     Ok(())
 }
 
-pub async fn copy_if_not_exist(from: impl AsRef<Path>, to: impl AsRef<Path>) -> io::Result<()> {
-    let from = canonicalize(from)?;
-    let to = to.as_ref();
+pub fn init_logger() {
+    use log::LevelFilter;
+    use simplelog::{ColorChoice, Config, TermLogger, TerminalMode};
+
+    TermLogger::init(LevelFilter::Debug, Config::default(), TerminalMode::Mixed, ColorChoice::Auto)
+        .unwrap();
+}
+
+pub async fn try_copy_file<A, B>(from: A, to: B) -> anyhow::Result<()>
+where
+    A: AsRef<Path>,
+    B: AsRef<Path>,
+{
+    let (from, to) = (from.as_ref(), to.as_ref());
+    let from =
+        canonicalize(from).with_context(|| format!("wrong file path: `{}`", from.display()))?;
     if !to.exists() {
         log::info!("copying `{}` -> `{}`", from.display(), to.display());
         fs::copy(from, to).await?;
