@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+function update_github_repositories() {
+    githubrepos=(
+        $HOME/.oh-my-zsh
+        $HOME/.pyenv
+        $HOME/.nvm
+    )
+
+    for repo in ${githubrepos[@]}; do
+        cd $repo
+	echo "Starting sync repository: ${repo}"
+	git stash
+        git pull origin master --rebase
+	git stash pop
+    done
+}
+
+function main() {
+    figlet "Good morning !"
+
+    brew update
+    brew upgrade
+    brew cleanup
+    rustup update
+    stack update
+    stack upgrade
+    stack hoogle
+
+    update_github_repositories
+}
+
+main

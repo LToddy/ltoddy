@@ -21,6 +21,8 @@ pub fn main() -> Result<()> {
         ("misc/hushlogin", home_dir.join(".hushlogin")),
         ("misc/alacritty.yml", home_dir.join(".config/alacritty/alacritty.yml")),
         ("misc/vimrc", home_dir.join(".vimrc")),
+        ("misc/morning", home_dir.join(".local/bin/morning")),
+        ("misc/zshrc", home_dir.join(".zshrc")),
     ];
     info!("start install misc files");
     for (from, to) in miscellaneous {
