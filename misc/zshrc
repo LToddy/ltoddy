@@ -23,7 +23,7 @@ export NVM_DIR="$HOME/.nvm" # nvm
 # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 eval "$(pyenv init --path)" # pyenv
-source '/Users/ltoddy/.pyenv/completions/pyenv.zsh' # auto complete pyenv command
+source "$HOME/.pyenv/completions/pyenv.zsh" # auto complete pyenv command
 
 eval "$(rbenv init -)" # rbenv
 
