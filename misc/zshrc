@@ -1,5 +1,6 @@
 custom_paths=(
     "$HOME/.local/bin"
+    "$HOME/bin"
     "/usr/local/opt/mysql-client/bin"
     "/usr/local/opt/libpq/bin"
     "/Applications/Sublime Text.app/Contents/SharedSupport/bin"
