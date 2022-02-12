@@ -2,19 +2,20 @@ use std::fs;
 use std::path::{Path, PathBuf};
 
 use anyhow::{Context, Result};
-use clap::Parser;
+use clap::{arg, App};
 use log::{info, LevelFilter};
 use simplelog::{ColorChoice, Config, TermLogger, TerminalMode};
 
-#[derive(Parser)]
 pub struct Args {
-    #[clap(short = 'f', long = "force")]
     force: bool,
 }
 
 pub fn main() -> Result<()> {
     init_logger();
-    let args: Args = Args::parse();
+
+    let matches = App::new("install-misc").arg(arg!(-f --force ... "force")).get_matches();
+    let force = matches.is_present("force");
+    let args = Args { force };
     let home_dir = PathBuf::from(env!("HOME"));
 
     let miscellaneous = vec![
