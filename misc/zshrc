@@ -8,11 +8,8 @@ custom_paths=(
 )
 export PATH="${(j.:.)custom_paths}:$PATH"
 export ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="pygmalion"
+ZSH_THEME="agnoster"
 plugins=(
-    brew
-    git
-    docker
     rust
     stack
 )
@@ -27,5 +24,3 @@ eval "$(rbenv init -)" # rbenv
 source $HOME/.cargo/env # Rust
 
 # alias swift-init='swift package init --type=executable' # for swift
-alias run-docker-mysql="docker run -d --rm --name=mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=hello -e MYSQL_DATABASE=bits mysql:8.0"
-alias run-docker-redis="docker run -d --rm --name=redis -p 6379:6379 redis:6.0-alpine"
